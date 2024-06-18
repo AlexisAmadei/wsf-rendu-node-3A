@@ -1,0 +1,12 @@
+### Get all users
+GET http://localhost/usr/users
+
+### Signup / Register
+POST http://localhost/auth/signup
+content-type: application/json
+
+{
+    "name": "Alexis Amadei",
+    "email": "alexis@amadei.fr",
+    "password": "password"
+}
