@@ -1,0 +1,27 @@
+{
+    "name": "rendu-node",
+    "version": "1.0.0",
+    "description": "Rendu final nodeJS",
+    "main": "./src/app.js",
+    "scripts": {
+        "start": "node ./src/app.js"
+    },
+    "author": "Alexis Amadei",
+    "dependencies": {
+        "bayes": "^1.0.0",
+        "chai": "^4.3.10",
+        "colors": "^1.4.0",
+        "express": "^4.17.1",
+        "knex": "^3.1.0",
+        "limdu": "^1.0.0",
+        "md5": "^2.3.0",
+        "mocha": "^10.2.0",
+        "prompt-sync": "^4.2.0",
+        "sequelize": "^6.35.1",
+        "sqlite3": "^5.1.7",
+        "supertest": "^6.3.3"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.3"
+    }
+}
