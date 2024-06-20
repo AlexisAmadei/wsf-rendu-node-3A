@@ -13,7 +13,7 @@ async function createTable() {
         table.string('email');
         table.string('password');
         table.boolean('admin').defaultTo(false);
-        table.orders('orders').defaultTo({});
+        table.json('orders').defaultTo({});
       });
       console.log('La table "users" a été créée avec succès.');
     } else {
