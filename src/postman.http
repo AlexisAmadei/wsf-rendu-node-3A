@@ -7,6 +7,26 @@ content-type: application/json
 
 {
     "name": "Alexis Amadei",
+    "email": "amadei@amadei.fr",
+    "password": "password"
+}
+
+### ADMIN Signup / Register
+POST http://localhost/auth/signup
+content-type: application/json
+
+{
+    "name": "Alexis Amadei",
+    "email": "alexis@amadei.fr",
+    "password": "password",
+    "admin": true
+}
+
+### Login
+POST http://localhost/auth/login
+content-type: application/json
+
+{
     "email": "alexis@amadei.fr",
     "password": "password"
 }
