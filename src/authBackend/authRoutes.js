@@ -7,7 +7,7 @@ const md5 = require('md5');
 
 // Signup routes / ceate user
 router.post('/signup', async (req, res) => {
-    const { name, email, password } = req.body;
+    const { name, email, password, admin } = req.body;
     const cryptPwd = md5(password);
     try {
         const allUser = await userModel.getAllUsers();
