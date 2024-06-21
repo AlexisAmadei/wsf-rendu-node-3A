@@ -4,13 +4,14 @@ const app = express();
 const userRoutes = require('./userBackend/userRoutes');
 const authRoutes = require('./authBackend/authRoutes');
 const productRoutes = require('./productBackend/productRoutes');
-// const contentRoutes = require('./contentBackend/contentRoutes');
+const adminRoutes = require('./userBackend/adminRoutes');
+const ordersRoutes = require('./ordersBackend/ordersRoutes');
 
 app.use(express.json());
 app.use('/usr', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/product', productRoutes);
-// app.use('/content', contentRoutes);
+app.use('/admin', adminRoutes);
 
 const PORT = 80;
 app.listen(PORT, () => {

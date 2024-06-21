@@ -1,4 +1,3 @@
-// productRoute.js
 const express = require('express');
 const router = express.Router();
 const productModel = require('./prodcutModel');
@@ -61,16 +60,11 @@ router.delete('/delete/:id', async (req, res) => {
 });
 
 // Mettre à jour un produit
-router.put('/update/:id', async (req, res) => {
-    const id = req.params.id;
-    const { name, price, stock, userId } = req.body;
-    const user = await userModel.getUserById(userId);
-        if (user.admin === 0) {
-            return res.status(401).json({ error: "User is not an admin" });
-        }
+router.put('/products/:id', async (req, res) => {
     try {
-        const product = await productModel.updateProduct(id, name, price, stock);
-        res.json("Product with id " + id + " updated successfully");
+        const { stock } = req.body;
+        await knex('products').where({ id: req.params.id }).update({ stock });
+        res.json({ message: 'Stock updated' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

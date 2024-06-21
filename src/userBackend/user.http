@@ -19,3 +19,6 @@ content-type: application/json
     "currentEmail": "amadei@amadei.fr",
     "newEmail": "new@amadei.fr"
 }
+
+### ADMIN get all order
+GET http://localhost/admin/orders

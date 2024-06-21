@@ -64,4 +64,14 @@ router.delete('/users/:id', async (req, res) => {
   }
 });
 
+// get user orders
+router.get('/users/:id/orders', async (req, res) => {
+  try {
+    const orders = await knex('orders').where({ user_id: req.params.id });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 module.exports = router;
