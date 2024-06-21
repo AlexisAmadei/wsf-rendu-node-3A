@@ -37,12 +37,16 @@ router.post('/users', async (req, res) => {
   }
 });
 
-// Mettre à jour un utilisateur existant
-router.put('/users/:id', async (req, res) => {
-  const { id } = req.params;
-  const { name, email } = req.body;
+
+router.put('/users/edit', async (req, res) => {
+  const { currentEmail, newEmail } = req.body;
   try {
-    await userModel.updateUser(id, name, email);
+    const user = await userModel.findOne({ email: currentEmail });
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
+    }
+    user.email = newEmail;
+    await user.save();
     res.json({ message: 'Utilisateur mis à jour avec succès' });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -59,6 +63,5 @@ router.delete('/users/:id', async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 });
-
 
 module.exports = router;

@@ -1,0 +1,21 @@
+### Get all users
+GET http://localhost/usr/users
+
+### Signup / Register
+POST http://localhost/auth/signup
+content-type: application/json
+
+{
+    "name": "Alexis Amadei",
+    "email": "amadei@amadei.fr",
+    "password": "password"
+}
+
+### Mettre à jour un utilisateur existant
+PUT http://localhost/users/edit
+content-type: application/json
+
+{
+    "currentEmail": "amadei@amadei.fr",
+    "newEmail": "new@amadei.fr"
+}
