@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const productModel = require('./prodcutModel');
+const userModel = require('../userBackend/userModel');
 
 // Récupérer tous les produits
 router.get('/all', async (req, res) => {
@@ -15,8 +16,12 @@ router.get('/all', async (req, res) => {
 
 // Ajouter un produit
 router.post('/add', async (req, res) => {
-    const { name, price, stock } = req.body;
+    const { name, price, stock, userId } = req.body;
     try {
+        const user = await userModel.getUserById(userId);
+        if (user.admin === 0) {
+            return res.status(401).json({ error: "User is not an admin" });
+        }
         const allProducts = await productModel.getAllProducts();
         const productExists = allProducts.find(product => product.name === name);
         if (productExists) {
@@ -29,7 +34,7 @@ router.post('/add', async (req, res) => {
             return res.status(400).json({ error: "Name must be a string" });
         }
         const product = await productModel.addProduct(name, price, stock);
-        res.json("Product added successfully with id " + product.id);
+        res.json("Product added successfully");
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -38,8 +43,17 @@ router.post('/add', async (req, res) => {
 // Supprimer un produit
 router.delete('/delete/:id', async (req, res) => {
     id = req.params.id;
+    const { userId } = req.body;
     try {
-        const product = await productModel.deleteProduct(id);
+        const user = await userModel.getUserById(userId);
+        if (user.admin === 0) {
+            return res.status(401).json({ error: "User is not an admin" });
+        }
+        const allProducts = await productModel.getAllProducts();
+        if (!allProducts.find(product => product.id === id)) {
+            return res.status(400).json({ error: "Product with id " + id + " does not exist" });
+        }
+        await productModel.deleteProduct(id);
         res.json("Product with id " + id + " deleted successfully");
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -49,10 +63,14 @@ router.delete('/delete/:id', async (req, res) => {
 // Mettre à jour un produit
 router.put('/update/:id', async (req, res) => {
     const id = req.params.id;
-    const { name, price, stock } = req.body;
+    const { name, price, stock, userId } = req.body;
+    const user = await userModel.getUserById(userId);
+        if (user.admin === 0) {
+            return res.status(401).json({ error: "User is not an admin" });
+        }
     try {
         const product = await productModel.updateProduct(id, name, price, stock);
-        res.json(product);
+        res.json("Product with id " + id + " updated successfully");
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
