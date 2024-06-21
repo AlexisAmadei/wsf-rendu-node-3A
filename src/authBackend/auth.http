@@ -1,0 +1,8 @@
+### All Login
+POST http://localhost/auth/login
+content-type: application/json
+
+{
+    "email": "amadei@amadei.fr",
+    "password": "password"
+}
