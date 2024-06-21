@@ -1,0 +1,24 @@
+### Get all products
+GET http://localhost/product/all
+
+### Add a product
+POST http://localhost/product/add
+content-type: application/json
+
+{
+    "name": "razor",
+    "price": 99,
+    "stock": 100
+}
+
+### Update a product
+PUT http://localhost/product/update
+{
+    "id": 1,
+    "name": "product name",
+    "price": 119,
+    "stock": 1000
+}
+
+### Delete a product
+DELETE http://localhost/product/delete/1
