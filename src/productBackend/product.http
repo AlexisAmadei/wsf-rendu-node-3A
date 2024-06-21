@@ -6,19 +6,22 @@ POST http://localhost/product/add
 content-type: application/json
 
 {
-    "name": "razor",
-    "price": 99,
-    "stock": 100
+    "name": "tablet",
+    "price": 15,
+    "stock": 100,
+    "userId": 1
 }
 
 ### Update a product
-PUT http://localhost/product/update
+PUT http://localhost/product/update/2
+content-type: application/json
+
 {
-    "id": 1,
-    "name": "product name",
+    "name": "razor blade V2",
     "price": 119,
-    "stock": 1000
+    "stock": 1000,
+    "userId": 1
 }
 
 ### Delete a product
-DELETE http://localhost/product/delete/1
+DELETE http://localhost/product/delete/3
