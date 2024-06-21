@@ -21,8 +21,19 @@ async function getUserByEmail(email) {
 
 // Update
 async function updateUser(id, newName, newEmail, admin) {
-  console.log('id:', id, 'newName:', newName, 'newEmail:', newEmail, 'admin:', admin);
   return await knex('users').where({ id }).update({ name: newName, email: newEmail, admin: admin});
+}
+
+async function updateUserPassword(id, newPassword) {
+  return await knex('users').where({ id }).update({ password: newPassword });
+}
+
+async function updateUserEmail(id, newEmail) {
+  return await knex('users').where({ id }).update({ email: newEmail });
+}
+
+async function updateUserName(id, newName) {
+  return await knex('users').where({ id }).update({ name: newName });
 }
 
 // Delete
@@ -36,5 +47,8 @@ module.exports = {
   getUserById,
   getUserByEmail,
   updateUser,
+  updateUserPassword,
+  updateUserEmail,
+  updateUserName,
   deleteUser
 };

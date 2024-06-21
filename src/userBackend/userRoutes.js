@@ -38,15 +38,38 @@ router.post('/users', async (req, res) => {
 });
 
 // Mettre à jour un utilisateur
-router.put('/users/edit', async (req, res) => {
-  const { currentEmail, newEmail, admin } = req.body;
+// Mettre à jour un utilisateur
+router.put('/users/:id', async (req, res) => {
+  const { id } = req.params;
+  const { currentEmail } = req.body;
+  const { newName, newEmail, newPassword } = req.body;
   try {
     const user = await userModel.getUserByEmail(currentEmail);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
-    user.email = newEmail;
-    await userModel.updateUser(user.id, user.name, user.email, admin);
+    if (newEmail) {
+      if (newEmail === user.email) {
+        return res.status(400).json({ message: 'Wrong email changes' });
+      } else {
+        await userModel.updateUserEmail(id, newEmail);
+      }
+    }
+    if (newName) {
+      if (newName === user.name) {
+        return res.status(400).json({ message: 'Wrong name changes' });
+      } else {
+        await userModel.updateUserName(id, newName);
+      }
+    }
+    if (newPassword) {
+      const cryptPwd = md5(newPassword);
+      if (cryptPwd === user.password) {
+        return res.status(400).json({ message: 'Wrong password changes' });
+      } else {
+        await userModel.updateUserPassword(id, cryptPwd);
+      }
+    }
     res.json({ message: 'Utilisateur mis à jour avec succès' });
   } catch (error) {
     res.status(500).json({ error: error.message });
