@@ -20,8 +20,9 @@ async function getUserByEmail(email) {
 }
 
 // Update
-async function updateUser(id, newName, newEmail) {
-  return await knex('users').where({ id }).update({ name: newName, email: newEmail });
+async function updateUser(id, newName, newEmail, admin) {
+  console.log('id:', id, 'newName:', newName, 'newEmail:', newEmail, 'admin:', admin);
+  return await knex('users').where({ id }).update({ name: newName, email: newEmail, admin: admin});
 }
 
 // Delete

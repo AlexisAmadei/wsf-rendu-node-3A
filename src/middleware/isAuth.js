@@ -1,8 +1,6 @@
 const express = require('express');
 const authModel = require('../authBackend/authModel');
 
-
-// middleware for authentication
 async function isAuthenticated(req, res, next) {
     try {
         const authId = req.headers.authorization;

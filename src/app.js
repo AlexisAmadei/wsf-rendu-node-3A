@@ -12,6 +12,7 @@ app.use('/usr', userRoutes);
 app.use('/auth', authRoutes);
 app.use('/product', productRoutes);
 app.use('/admin', adminRoutes);
+app.use('/orders', ordersRoutes);
 
 const PORT = 80;
 app.listen(PORT, () => {

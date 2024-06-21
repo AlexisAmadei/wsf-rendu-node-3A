@@ -12,7 +12,7 @@ async function createTable() {
         table.string('name');
         table.string('email');
         table.string('password');
-        table.boolean('admin').defaultTo(false);
+        table.tinyint('admin').defaultTo(0);
         table.json('orders').defaultTo({});
       });
       console.log('La table "users" a été créée avec succès.');

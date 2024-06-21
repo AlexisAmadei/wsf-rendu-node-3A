@@ -37,16 +37,16 @@ router.post('/users', async (req, res) => {
   }
 });
 
-
+// Mettre à jour un utilisateur
 router.put('/users/edit', async (req, res) => {
-  const { currentEmail, newEmail } = req.body;
+  const { currentEmail, newEmail, admin } = req.body;
   try {
-    const user = await userModel.findOne({ email: currentEmail });
+    const user = await userModel.getUserByEmail(currentEmail);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
     user.email = newEmail;
-    await user.save();
+    await userModel.updateUser(user.id, user.name, user.email, admin);
     res.json({ message: 'Utilisateur mis à jour avec succès' });
   } catch (error) {
     res.status(500).json({ error: error.message });
