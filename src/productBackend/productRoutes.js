@@ -37,10 +37,10 @@ router.post('/add', async (req, res) => {
 
 // Supprimer un produit
 router.delete('/delete/:id', async (req, res) => {
-    const id = req.params.id;
+    id = req.params.id;
     try {
         const product = await productModel.deleteProduct(id);
-        res.json(product);
+        res.json("Product with id " + id + " deleted successfully");
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
