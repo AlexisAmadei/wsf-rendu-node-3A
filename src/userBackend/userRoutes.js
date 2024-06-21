@@ -38,13 +38,11 @@ router.post('/users', async (req, res) => {
 });
 
 // Mettre à jour un utilisateur
-// Mettre à jour un utilisateur
 router.put('/users/:id', async (req, res) => {
   const { id } = req.params;
-  const { currentEmail } = req.body;
   const { newName, newEmail, newPassword } = req.body;
   try {
-    const user = await userModel.getUserByEmail(currentEmail);
+    const user = await userModel.getUserById(id);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }

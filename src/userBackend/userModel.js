@@ -20,10 +20,6 @@ async function getUserByEmail(email) {
 }
 
 // Update
-async function updateUser(id, newName, newEmail, admin) {
-  return await knex('users').where({ id }).update({ name: newName, email: newEmail, admin: admin});
-}
-
 async function updateUserPassword(id, newPassword) {
   return await knex('users').where({ id }).update({ password: newPassword });
 }
@@ -46,7 +42,6 @@ module.exports = {
   getAllUsers,
   getUserById,
   getUserByEmail,
-  updateUser,
   updateUserPassword,
   updateUserEmail,
   updateUserName,
