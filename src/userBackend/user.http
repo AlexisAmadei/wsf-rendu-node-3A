@@ -16,23 +16,15 @@ POST http://localhost/auth/login
 content-type: application/json
 
 {
-    "email": "amadei@amadei.fr",
+    "email": "alexis@amadei.fr",
     "password": "password"
 }
 
 ### Mettre à jour un utilisateur existant
-PUT http://localhost/usr/users/edit
+PUT http://localhost/usr/users/1
 content-type: application/json
 
 {
     "currentEmail": "alexis@amadei.fr",
-    "newEmail": "alexis1@amadei.fr"
-}
-
-### ADMIN get all order
-GET http://localhost/orders/all
-content-type: application/json
-
-{
-    "userId": "1"
+    "newName": "Alex Ama"
 }

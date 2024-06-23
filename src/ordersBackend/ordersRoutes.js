@@ -30,11 +30,20 @@ router.get('/:id', isAdmin, async (req, res) => {
 
 // Create order
 router.post('/new', isAuthenticated, async (req, res) => {
-    const { products } = req.body;
-    const user_id = req.user.id;
+    const { userId, products } = req.body;
     try {
-        const orderId = await ordersModel.createOrder(user_id, products);
-        res.status(201).json({ message: 'Order created successfully', orderId });
+        const user = await userModel.getUserById(userId);
+        if (!user) {
+            return res.status(400).json({ error: 'User not found' });
+        }
+        for (const { productId, quantity } of products) {
+            const product = await productModel.getProductById(productId);
+            if (!product || product.stock < quantity) {
+                return res.status(400).json({ error: 'Product not found or not enough stock' });
+            }
+        }
+        const orderId = await ordersModel.createOrder(userId, products);
+        res.json({ orderId });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

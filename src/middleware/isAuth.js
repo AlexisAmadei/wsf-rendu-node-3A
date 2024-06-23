@@ -2,6 +2,7 @@ const express = require('express');
 const authModel = require('../authBackend/authModel');
 
 async function isAuthenticated(req, res, next) {
+    console.log('params: ', req.headers);
     try {
         const authId = req.headers.authorization;
         console.log('authId:', authId);

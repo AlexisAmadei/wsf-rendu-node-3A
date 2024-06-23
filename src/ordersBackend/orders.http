@@ -1,0 +1,25 @@
+### ADMIN get all order
+GET http://localhost/orders/all
+content-type: application/json
+
+{
+    "userId": "1"
+}
+
+### USER single order
+POST http://localhost/orders/new
+content-type: application/json
+Authorization: 1
+
+{
+    "products": [
+        {
+            "productId": "1",
+            "quantity": "2"
+        },
+        {
+            "productId": "2",
+            "quantity": "1"
+        }
+    ]
+}

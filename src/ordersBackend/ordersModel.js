@@ -11,8 +11,7 @@ async function getOrderById(id) {
 }
 
 // Create order
-async function createOrder(user_id, products) {
-  const date = new Date().toISOString();
+async function createOrder(userId, products) {
   let total_price = 0;
 
   // Calculate total price and check stocks
@@ -30,7 +29,7 @@ async function createOrder(user_id, products) {
   }
 
   // Create order
-  const [orderId] = await knex('orders').insert({ user_id, products: JSON.stringify(products), total_price, date, status: 'pending' });
+  const [orderId] = await knex('orders').insert({ userId, products: JSON.stringify(products), total_price, date, status: 'pending' });
   return orderId;
 }
 
